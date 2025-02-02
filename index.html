@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>NiaTranslator - Refined UI</title>
-  <!-- Example: using Google Fonts -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NiaTranslator: Novel & Fanfiction Translation Tool" />
+  <title>NiaTranslator - Novel & Fanfiction Tool</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet"
   />
+
   <style>
-    /* ===== GENERAL RESET & BASE ===== */
-    * {
+    /* ======== RESET & BASE ======== */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -21,16 +24,17 @@
       font-family: 'Open Sans', Arial, sans-serif;
       background: #f4f5f7;
       color: #333;
+      line-height: 1.5;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* ===== HEADER / TITLE BAR ===== */
+    /* ======== HEADER ======== */
     header {
-      background: #3f51b5; /* A nice purple-blue */
+      background: #3f51b5;
       color: #fff;
       padding: 1rem 2rem;
-      margin-bottom: 1.5rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
     }
     header h1 {
       margin: 0;
@@ -38,14 +42,23 @@
       font-size: 1.8rem;
     }
 
-    /* ===== CONTAINER ===== */
+    /* ======== CONTAINER ======== */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1rem;
     }
 
-    /* ===== SECTION WRAPPERS ===== */
+    /* ======== SECTIONS ======== */
+    .section {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: relative;
+      margin-bottom: 2rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
     .section-title {
       text-align: center;
       font-size: 1.4rem;
@@ -58,46 +71,17 @@
       text-align: center;
       margin-bottom: 1rem;
     }
-    .section {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      position: relative;
-      margin-bottom: 2rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
 
-    /* ===== BUTTONS ===== */
-    button {
-      background-color: #3f51b5;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 0.6rem 1rem;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.1s ease;
+    /* ======== FORMS & INPUTS ======== */
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
     }
-    button:hover {
-      background-color: #2c3996;
-    }
-    button:active {
-      transform: scale(0.98);
-    }
-    button.secondary {
-      background-color: #757575;
-    }
-    button.secondary:hover {
-      background-color: #5e5e5e;
-    }
-
-    input, select, textarea {
-      font-family: 'Open Sans', Arial, sans-serif;
-    }
-
-    /* ===== TEXT INPUTS ===== */
-    input[type="text"], select, textarea {
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
       border: 1px solid #ccc;
       border-radius: 4px;
       padding: 0.5rem;
@@ -113,14 +97,37 @@
       border-color: #3f51b5;
       box-shadow: 0 0 0 2px rgba(63,81,181,0.15);
     }
-
     textarea {
-      width: 100%;
       resize: vertical;
-      min-height: 120px;
+      min-height: 100px;
     }
 
-    /* ===== GRID LAYOUT ===== */
+    /* ======== BUTTONS ======== */
+    button {
+      display: inline-block;
+      background-color: #3f51b5;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 0.6rem 1rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+    button:hover {
+      background-color: #2c3996;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    .secondary {
+      background-color: #757575;
+    }
+    .secondary:hover {
+      background-color: #5e5e5e;
+    }
+
+    /* ======== GRID ======== */
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -132,7 +139,7 @@
       }
     }
 
-    /* ===== API KEY SECTION ===== */
+    /* ======== API KEY SECTION ======== */
     #apiKeyContainer {
       max-width: 600px;
       margin: 0 auto;
@@ -148,7 +155,20 @@
       font-weight: 600;
     }
 
-    /* ===== PROGRESS BAR ===== */
+    /* ======== TRANSLATION SECTION ======== */
+    #translationSection .section-title {
+      margin-top: 0;
+    }
+    #charCount {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+    #loadingIndicator {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
     .progress-bar-container {
       width: 100%;
       background-color: #e9ecef;
@@ -168,22 +188,7 @@
       transition: width 0.2s ease;
     }
 
-    /* ===== TRANSLATION SECTION ===== */
-    #translationSection .section-title {
-      margin-top: 0;
-    }
-    #charCount {
-      font-size: 0.85rem;
-      color: #999;
-      margin-bottom: 0.5rem;
-    }
-    #loadingIndicator {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    /* ===== GLOSSARY SECTION ===== */
+    /* ======== GLOSSARY SECTION ======== */
     #glossarySection .section-title {
       margin-top: 0;
     }
@@ -198,7 +203,6 @@
       margin: 0 !important;
     }
 
-    /* ===== GLOSSARY TABLE ===== */
     .glossary-list {
       max-height: 320px;
       overflow-y: auto;
@@ -211,7 +215,8 @@
       width: 100%;
       border-collapse: collapse;
     }
-    .glossary-list th, .glossary-list td {
+    .glossary-list th,
+    .glossary-list td {
       text-align: left;
       padding: 0.75rem;
       border-bottom: 1px solid #eee;
@@ -226,7 +231,12 @@
       background: #f9f9f9;
     }
 
-    /* ===== DARK MODE ===== */
+    /* ======== CUSTOM NOTES SECTION ======== */
+    #contextSection .section-title {
+      margin-top: 0;
+    }
+
+    /* ======== DARK MODE ======== */
     .dark-mode {
       background-color: #222;
       color: #ccc;
@@ -287,99 +297,116 @@
     }
   </style>
 </head>
-<body>
 
-  <!-- HEADER -->
+<body>
   <header>
     <h1>NiaTranslator</h1>
   </header>
 
-  <!-- MAIN CONTENT -->
   <div class="container">
-
-    <!-- API KEY SETUP -->
+    <!-- ====== API KEY SETUP ====== -->
     <section class="section" id="apiKeyContainer">
       <h2 class="section-title">API Key Setup</h2>
-      <div class="subtitle">
-        Provide your OpenRouter API Key to use the translation service
-      </div>
+      <p class="subtitle">Provide your OpenRouter API Key to use the translation service</p>
       <input type="text" id="apiKeyInput" placeholder="Enter your OpenRouter API Key">
       <button id="saveApiKeyButton">Save API Key</button>
       <p id="apiKeyStatus" style="color: green;"></p>
     </section>
 
+    <!-- ====== CUSTOM NOTES SECTION ====== -->
+    <section class="section" id="contextSection">
+      <h2 class="section-title">Persistent Notes for Novel & Fanfiction</h2>
+      <p class="subtitle">
+        Enter important context for your story (e.g., "The main character is Gojo Satoru, a playful sorcerer."). 
+        These notes will be added to the system prompt before translation.
+      </p>
+      <textarea
+        id="customNotes"
+        placeholder="Example: The main character is Gojo Satoru, with silver hair, witty remarks..."
+      ></textarea>
+      <div style="margin-top: 1rem;">
+        <button id="saveNotesButton">Save Notes</button>
+        <button id="clearNotesButton" class="secondary">Clear</button>
+        <input type="checkbox" id="useNotesCheckbox" checked>
+        <label for="useNotesCheckbox">Use Custom Notes</label>
+      </div>
+    </section>
+
     <div class="grid">
-      <!-- TRANSLATION SECTION -->
+      <!-- ====== TRANSLATION SECTION ====== -->
       <section class="section" id="translationSection">
         <div class="progress-bar-container" id="progressBarContainer">
           <div class="progress-bar" id="progressBar"></div>
         </div>
         <h2 class="section-title">Translation</h2>
-        <div class="subtitle" style="margin-bottom:1rem;">
-          Paste your text (HTML or plain), then translate
-        </div>
-
+        <p class="subtitle">Paste your text (HTML or plain), then translate</p>
         <div id="charCount">Characters: 0 | Approx. Tokens: 0</div>
-        <textarea id="inputText" placeholder="Paste Chinese text or HTML here..."></textarea>
-
-        <div style="margin-bottom: 1rem;">
+        <textarea id="inputText" placeholder="Paste text or HTML here..."></textarea>
+        
+        <div style="margin-bottom: 1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
           <button id="clearInputButton" class="secondary">Clear Input</button>
-        </div>
-
-        <div style="margin-bottom: 1rem;">
           <button id="preReplaceButton">Use Glossary</button>
+          <button id="uploadDocxButton" class="secondary">Upload .docx</button>
+          <input type="file" id="docxFileInput" accept=".docx" style="display: none;" />
         </div>
 
-        <div style="margin-bottom: 1rem;">
+        <div style="margin-bottom:1rem; display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+          <label for="targetLanguage" style="margin-bottom:0;">Target Language:</label>
           <select id="targetLanguage">
             <option value="en">English</option>
             <option value="ja">Japanese</option>
           </select>
           <button id="translateButton">Translate</button>
-          <div id="loadingIndicator" style="display:none;">Translating... Please wait.</div>
         </div>
 
+        <div id="loadingIndicator" style="display:none;">Translating... Please wait.</div>
         <textarea id="translatedText" readonly placeholder="Translated text will appear here."></textarea>
-        <div style="margin-top:1rem;">
+        
+        <div style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
           <button id="clearOutputButton" class="secondary">Clear Output</button>
           <button id="exportTxtButton">Export as .txt</button>
           <button id="exportHtmlButton">Export as .html</button>
         </div>
 
-        <!-- Real-time translation (optional) -->
         <div style="margin-top:1.5rem; text-align:center;">
           <input type="checkbox" id="realtimeCheckbox">
           <label for="realtimeCheckbox">Enable real-time translation (beta)</label>
         </div>
       </section>
 
-      <!-- GLOSSARY MANAGEMENT SECTION -->
+      <!-- ====== GLOSSARY SECTION ====== -->
       <section class="section" id="glossarySection">
         <h2 class="section-title">Glossary Management</h2>
-        <div class="subtitle">
-          Manage custom terms here and pre-replace them in your text
-        </div>
-
+        <p class="subtitle">Manage custom terms here and pre-replace them in your text</p>
         <button id="toggleGlossaryPanel" style="position:absolute; top:1rem; right:1rem;">Hide</button>
         <div id="glossaryPanel">
           <div style="margin-bottom:1rem;">
             <button id="generateGlossaryButton" class="secondary">Generate Glossary from Input</button>
           </div>
-
-          <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap: wrap;">
-            <input type="text" id="newTerm" placeholder="Chinese term" style="flex:1;">
-            <input type="text" id="newTranslation" placeholder="Translation" style="flex:1;">
-            <input type="text" id="newCategory" placeholder="Category" style="flex:1;">
-            <button id="addOrUpdateGlossaryButton">Add/Update</button>
+          <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
+            <div style="flex:1; min-width:150px;">
+              <label for="newTerm">Chinese Term</label>
+              <input type="text" id="newTerm" placeholder="Chinese term">
+            </div>
+            <div style="flex:1; min-width:150px;">
+              <label for="newTranslation">Translation</label>
+              <input type="text" id="newTranslation" placeholder="Translation">
+            </div>
+            <div style="flex:1; min-width:150px;">
+              <label for="newCategory">Category</label>
+              <input type="text" id="newCategory" placeholder="Category">
+            </div>
+            <div>
+              <button id="addOrUpdateGlossaryButton">Add/Update</button>
+            </div>
           </div>
-
+          <label for="searchGlossary">Search Glossary:</label>
           <input
             type="text"
             id="searchGlossary"
             placeholder="Search glossary..."
             style="margin-bottom:1rem; width:100%;"
           >
-
           <div class="glossary-list">
             <table>
               <thead>
@@ -394,13 +421,11 @@
               <tbody id="glossaryTable"></tbody>
             </table>
           </div>
-
           <div style="margin-top:1rem;">
             <button id="importGlossaryButton" class="secondary">Import Glossary</button>
             <button id="exportGlossaryButton">Export Glossary</button>
             <input type="file" id="importGlossaryFile" style="display:none" accept=".json">
           </div>
-
           <div style="margin-top:1rem;">
             <button id="themeToggleButton" class="secondary">Toggle Dark Mode</button>
           </div>
@@ -410,72 +435,48 @@
   </div>
 
   <script>
-    /* ==============================
-       ======= GLOBAL STATE ========
-       ============================== */
+    /* ================================
+       =========== GLOBALS ============
+       ================================ */
+    const BACKEND_URL = "http://localhost:3000"; // or your deployed server
     let openRouterApiKey = localStorage.getItem("openRouterApiKey") || "";
 
-    // Hardcoded glossary with categories & format
+    // Hardcoded sample glossary
     let glossary = {
       "五条悟": { translation: "Gojo Satoru", format: "off", category: "character" },
       "电次": { translation: "Denji", format: "off", category: "character" },
-      "小埋": { translation: "Umaru", format: "off", category: "character" },
-      "海老名菜菜": { translation: "Nana Ebina", format: "off", category: "character" },
-      "皆川茜": { translation: "Akane Minagawa", format: "off", category: "character" },
-      "御币岛昂": { translation: "Subaru Mitejima", format: "off", category: "character" },
-      "中野二乃": { translation: "Nino Nakano", format: "off", category: "character" },
-      "中野一花": { translation: "Ichika Nakano", format: "off", category: "character" },
-      "中野三玖": { translation: "Miku Nakano", format: "off", category: "character" },
-      "中野四叶": { translation: "Yotsuba Nakano", format: "off", category: "character" },
-      "中野五月": { translation: "Itsuki Nakano", format: "off", category: "character" },
-      "土御门有马": { translation: "Arima Tsuchimikado", format: "off", category: "character" },
-      "化野红绪": { translation: "Adashino Benio", format: "off", category: "character" },
-      "化野真鱼": { translation: "Mana Tsuchimikado", format: "off", category: "character" },
-      "喜多川海梦": { translation: "Marin Kitagawa", format: "off", category: "character" },
-      "见崎鸣": { translation: "Misaki Mei", format: "off", category: "character" },
-      "平冢静": { translation: "Shizuka Hiratsuka", format: "off", category: "character" },
-      "暗无": { translation: "Kuranashi", format: "off", category: "character" },
-      "鈩": { translation: "Tatara", format: "off", category: "character" },
-      "总武高": { translation: "Sobu High School", format: "off", category: "location" },
-      "祸野": { translation: "Magano", format: "off", category: "location" },
-      "涩谷": { translation: "Shibuya", format: "off", category: "location" },
-      "虚无界": { translation: "Void Realm", format: "off", category: "location" },
-      "咒符·急急如律令": { translation: "Talismans: By the Law of Incantation", format: "off", category: "technique" },
-      "污秽召唤": { translation: "Kegare Summoning", format: "off", category: "technique" },
-      "污秽": { translation: "Kegare", format: "off", category: "concept" },
-      "婆娑罗": { translation: "Basara", format: "off", category: "concept" },
-      "撒旦": { translation: "Satan", format: "off", category: "concept" }
+      // ... You can add more or load from localStorage
     };
 
-    /* ==============================
-       === DOM ELEMENT REFERENCES ===
-       ============================== */
+    /* ================ DOM Elements ================ */
     const inputTextEl      = document.getElementById("inputText");
     const translatedTextEl = document.getElementById("translatedText");
     const charCountEl      = document.getElementById("charCount");
+    const loadingIndicator = document.getElementById("loadingIndicator");
     const progressBarContainer = document.getElementById("progressBarContainer");
     const progressBarEl    = document.getElementById("progressBar");
-    const loadingIndicator = document.getElementById("loadingIndicator");
+    const docxFileInput    = document.getElementById("docxFileInput");
 
-    /* ==============================
-       ========== ON LOAD ===========
-       ============================== */
+    /* ================ On Load ================ */
     document.getElementById("apiKeyInput").value = openRouterApiKey;
-
     window.addEventListener("DOMContentLoaded", () => {
-      // Merge any previously stored glossary with defaults
+      // Merge any previously stored glossary
       const storedGlossary = localStorage.getItem("glossary");
       if (storedGlossary) {
-        const loaded = JSON.parse(storedGlossary);
-        glossary = { ...glossary, ...loaded };
+        try {
+          glossary = { ...glossary, ...JSON.parse(storedGlossary) };
+        } catch {}
       }
       renderGlossaryList();
       updateCharCount();
+
+      // Load saved notes
+      document.getElementById("customNotes").value = localStorage.getItem("customNotes") || "";
     });
 
-    /* ==============================
-       ===== API KEY HANDLING ======
-       ============================== */
+    /* ================================
+       ====== API KEY MANAGEMENT ======
+       ================================ */
     document.getElementById("saveApiKeyButton").addEventListener("click", () => {
       const keyInput = document.getElementById("apiKeyInput").value.trim();
       if (keyInput) {
@@ -489,29 +490,47 @@
       }
     });
 
-    /* ==============================
-       ==== GLOSSARY MANAGEMENT ====
-       ============================== */
+    /* ================================
+       === PERSISTENT NOTES (CONTEXT) ==
+       ================================ */
+    document.getElementById("saveNotesButton").addEventListener("click", () => {
+      const notes = document.getElementById("customNotes").value.trim();
+      localStorage.setItem("customNotes", notes);
+      alert("Notes saved!");
+    });
+    document.getElementById("clearNotesButton").addEventListener("click", () => {
+      document.getElementById("customNotes").value = "";
+      localStorage.removeItem("customNotes");
+    });
+    function getCustomPrompt() {
+      const useNotes = document.getElementById("useNotesCheckbox").checked;
+      const notes = localStorage.getItem("customNotes") || "";
+      if (!useNotes || !notes) return "";
+      // Build a basic "system" style context
+      return `You are translating a novel or fanfiction. ${notes}`;
+    }
+
+    /* ================================
+       ====== GLOSSARY MANAGEMENT =====
+       ================================ */
     function saveGlossary() {
       localStorage.setItem("glossary", JSON.stringify(glossary));
     }
-
-    function renderGlossaryList(filteredGlossary = null) {
+    function renderGlossaryList(filtered = null) {
       const glossaryTable = document.getElementById("glossaryTable");
       glossaryTable.innerHTML = "";
-
-      const items = filteredGlossary || glossary;
-      for (const [term, data] of Object.entries(items)) {
+      const dataSource = filtered || glossary;
+      for (const [term, entry] of Object.entries(dataSource)) {
         const row = document.createElement("tr");
         row.innerHTML = `
           <td>${term}</td>
-          <td>${data.translation}</td>
+          <td>${entry.translation}</td>
           <td>
             <button onclick="toggleFormat('${term}')">
-              ${data.format.charAt(0).toUpperCase() + data.format.slice(1)}
+              ${entry.format.charAt(0).toUpperCase() + entry.format.slice(1)}
             </button>
           </td>
-          <td>${data.category || ""}</td>
+          <td>${entry.category || ""}</td>
           <td>
             <button onclick="editGlossaryTerm('${term}')">Edit</button>
             <button onclick="deleteGlossaryTerm('${term}')">Delete</button>
@@ -520,84 +539,57 @@
         glossaryTable.appendChild(row);
       }
     }
-
-    // Add or update a glossary term
-    document.getElementById("addOrUpdateGlossaryButton").addEventListener("click", () => {
-      const term       = document.getElementById("newTerm").value.trim();
-      const translation= document.getElementById("newTranslation").value.trim();
-      const category   = document.getElementById("newCategory").value.trim();
-
-      if (term && translation) {
-        if (!glossary[term]) {
-          glossary[term] = { translation, format: "off", category };
-        } else {
-          glossary[term].translation = translation;
-          glossary[term].category    = category;
-        }
-        saveGlossary();
-        renderGlossaryList();
-        document.getElementById("newTerm").value        = "";
-        document.getElementById("newTranslation").value = "";
-        document.getElementById("newCategory").value    = "";
-      } else {
-        alert("Please enter both a term and its translation.");
-      }
-    });
-
-    // Dummy AI-based generation button
-    document.getElementById("generateGlossaryButton").addEventListener("click", async () => {
-      const text = inputTextEl.value.trim();
-      if (!text) {
-        alert("Please enter or paste text in the input area first.");
-        return;
-      }
-      alert("This button is a placeholder. Implement your AI-based glossary generation logic here if desired.");
-    });
-
-    // Toggling format
     window.toggleFormat = function(term) {
       const formats = ["off", "bold", "italic"];
       const current = glossary[term].format;
-      const idx = formats.indexOf(current);
-      const nextFormat = formats[(idx + 1) % formats.length];
-      glossary[term].format = nextFormat;
+      const next = formats[(formats.indexOf(current) + 1) % formats.length];
+      glossary[term].format = next;
       saveGlossary();
       renderGlossaryList();
     };
-
-    // Edit an existing term
     window.editGlossaryTerm = function(term) {
-      const data = glossary[term];
-      document.getElementById("newTerm").value        = term;
-      document.getElementById("newTranslation").value = data.translation;
-      document.getElementById("newCategory").value    = data.category || "";
+      document.getElementById("newTerm").value = term;
+      document.getElementById("newTranslation").value = glossary[term].translation;
+      document.getElementById("newCategory").value = glossary[term].category || "";
     };
-
-    // Delete a term
     window.deleteGlossaryTerm = function(term) {
       delete glossary[term];
       saveGlossary();
       renderGlossaryList();
-    };
-
-    // Search glossary
+    }
+    document.getElementById("addOrUpdateGlossaryButton").addEventListener("click", () => {
+      const t = document.getElementById("newTerm").value.trim();
+      const tr = document.getElementById("newTranslation").value.trim();
+      const c = document.getElementById("newCategory").value.trim();
+      if (t && tr) {
+        if (!glossary[t]) {
+          glossary[t] = { translation: tr, format: "off", category: c };
+        } else {
+          glossary[t].translation = tr;
+          glossary[t].category = c;
+        }
+        saveGlossary();
+        renderGlossaryList();
+        document.getElementById("newTerm").value = "";
+        document.getElementById("newTranslation").value = "";
+        document.getElementById("newCategory").value = "";
+      } else {
+        alert("Please fill in term and translation!");
+      }
+    });
     document.getElementById("searchGlossary").addEventListener("input", (e) => {
-      const query = e.target.value.toLowerCase();
+      const val = e.target.value.toLowerCase();
       const filtered = {};
-      for (const [term, data] of Object.entries(glossary)) {
-        const cat = data.category || "";
-        if (
-          term.toLowerCase().includes(query) ||
-          data.translation.toLowerCase().includes(query) ||
-          cat.toLowerCase().includes(query)
-        ) {
-          filtered[term] = data;
+      for (const [term, entry] of Object.entries(glossary)) {
+        if (term.toLowerCase().includes(val) ||
+            entry.translation.toLowerCase().includes(val) ||
+            (entry.category || "").toLowerCase().includes(val)) {
+          filtered[term] = entry;
         }
       }
       renderGlossaryList(filtered);
     });
-
-    // Import / Export glossary
+    // Import/Export
     document.getElementById("importGlossaryButton").addEventListener("click", () => {
       document.getElementById("importGlossaryFile").click();
     });
@@ -605,14 +597,14 @@
       const file = e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (evt) => {
+      reader.onload = evt => {
         try {
           const imported = JSON.parse(evt.target.result);
           glossary = { ...glossary, ...imported };
           saveGlossary();
           renderGlossaryList();
         } catch (err) {
-          alert("Invalid JSON format.");
+          alert("Invalid JSON");
         }
       };
       reader.readAsText(file);
@@ -625,50 +617,67 @@
       a.download = "glossary.json";
       a.click();
     });
-
-    /* ============================================================== 
-       =  (1) FRONT-END PRE-REPLACE GLOSSARY TERMS INSIDE INPUT  =
-       =    Incorporate bold/italic if glossary.format !== "off"  =
-       ============================================================== */
-    document.getElementById("preReplaceButton").addEventListener("click", () => {
-      let originalText = inputTextEl.value;
-      if (!originalText.trim()) {
-        alert("Please paste Chinese text in the input box first.");
-        return;
-      }
-
-      let replacedText = originalText;
-      for (const [term, data] of Object.entries(glossary)) {
-        if (!term) continue;
-        const safeTerm = escapeRegExp(term);
-        const regex = new RegExp(safeTerm, "g");
-
-        replacedText = replacedText.replace(regex, () => {
-          if (data.format === "bold") {
-            return `<b>${data.translation}</b>`;
-          } else if (data.format === "italic") {
-            return `<i>${data.translation}</i>`;
-          } else {
-            return data.translation;
-          }
-        });
-      }
-
-      inputTextEl.value = replacedText;
-      updateCharCount();
-      alert("Glossary terms have been replaced in the input text!");
+    document.getElementById("generateGlossaryButton").addEventListener("click", () => {
+      alert("Placeholder: Implement AI-based glossary generation if desired.");
     });
 
-    function escapeRegExp(str) {
-      return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    }
+    /* ================================
+       === GLOSSARY PRE-REPLACEMENT ===
+       ================================ */
+    document.getElementById("preReplaceButton").addEventListener("click", () => {
+      let original = inputTextEl.value;
+      if (!original.trim()) {
+        alert("Please enter text first!");
+        return;
+      }
+      let replaced = original;
+      for (const [term, data] of Object.entries(glossary)) {
+        if (!term) continue;
+        const safeTerm = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(safeTerm, "g");
+        replaced = replaced.replace(regex, () => {
+          if (data.format === "bold") return `<b>${data.translation}</b>`;
+          if (data.format === "italic") return `<i>${data.translation}</i>`;
+          return data.translation;
+        });
+      }
+      inputTextEl.value = replaced;
+      updateCharCount();
+      alert("Glossary terms replaced in input text.");
+    });
 
-    /* ==============================
-       ====== TRANSLATION FLOW ======
-       ============================== */
-    let typingTimer;
-    const realTimeDelay = 1000;
+    /* ================================
+       === DOCX UPLOAD HANDLING ======
+       ================================ */
+    document.getElementById("uploadDocxButton").addEventListener("click", () => {
+      docxFileInput.click();
+    });
+    docxFileInput.addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (!openRouterApiKey) {
+        alert("Please set your API key first.");
+        return;
+      }
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        const response = await fetch(`${BACKEND_URL}/upload-docx`, {
+          method: "POST",
+          body: formData
+        });
+        if (!response.ok) throw new Error("Upload or extraction failed");
+        const data = await response.json();
+        inputTextEl.value = data.text;
+        updateCharCount();
+      } catch (err) {
+        alert("Error reading .docx file.");
+      }
+    });
 
+    /* ================================
+       ======== TRANSLATION FLOW ======
+       ================================ */
     document.getElementById("clearInputButton").addEventListener("click", () => {
       inputTextEl.value = "";
       updateCharCount();
@@ -677,6 +686,9 @@
       translatedTextEl.value = "";
     });
 
+    // Real-time translation with small delay
+    let typingTimer;
+    const realtimeDelay = 1000;
     inputTextEl.addEventListener("input", () => {
       updateCharCount();
       const realtimeCheckbox = document.getElementById("realtimeCheckbox");
@@ -684,56 +696,70 @@
       clearTimeout(typingTimer);
       typingTimer = setTimeout(() => {
         performTranslation();
-      }, realTimeDelay);
+      }, realtimeDelay);
     });
 
+    // Manual translation
     document.getElementById("translateButton").addEventListener("click", () => {
       performTranslation();
     });
 
-    const BACKEND_URL = "https://translate-api-production-afd6.up.railway.app"; // Your backend URL
+    async function performTranslation() {
+      const text = inputTextEl.value.trim();
+      const targetLanguage = document.getElementById("targetLanguage").value;
+      if (!text) {
+        alert("Please enter text to translate!");
+        return;
+      }
+      if (!openRouterApiKey) {
+        alert("Please set your API key first.");
+        return;
+      }
+      startProgress();
+      loadingIndicator.style.display = "block";
+      const userNotes = getCustomPrompt();
 
-async function performTranslation() {
-  const inputText = document.getElementById("inputText").value.trim();
-  const targetLanguage = document.getElementById("targetLanguage").value;
+      try {
+        // Optionally chunk the text if it's too long
+        const chunkedResult = await translateLargeText(text, targetLanguage, userNotes);
+        translatedTextEl.value = chunkedResult;
+      } catch (error) {
+        console.error(error);
+        alert("Translation error occurred.");
+      } finally {
+        loadingIndicator.style.display = "none";
+        endProgress();
+      }
+    }
 
-  if (!inputText) {
-    alert("Please enter text to translate.");
-    return;
-  }
-  if (!openRouterApiKey) {
-    alert("Please enter your API key first.");
-    return;
-  }
+    // Example chunking approach
+    async function translateLargeText(fullText, targetLanguage, customNotes = "") {
+      const chunkSize = 4000; // ~4000 chars, can adjust for tokens
+      let start = 0;
+      let finalOutput = "";
+      while (start < fullText.length) {
+        const chunk = fullText.slice(start, start + chunkSize);
+        const translatedChunk = await fetch(`${BACKEND_URL}/translate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            apiKey: openRouterApiKey,
+            text: chunk,
+            targetLanguage: targetLanguage,
+            glossary,
+            customNotes
+          })
+        }).then(r => r.json());
+        if (translatedChunk.error) throw new Error(translatedChunk.error);
+        finalOutput += translatedChunk.translatedText;
+        start += chunkSize;
+      }
+      return finalOutput;
+    }
 
-  startProgress();
-  document.getElementById("loadingIndicator").style.display = "block";
-
-  try {
-    const response = await fetch(`${BACKEND_URL}/translate`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        apiKey: openRouterApiKey,
-        text: inputText,
-        targetLanguage
-      }),
-    });
-
-    if (!response.ok) throw new Error("Translation failed.");
-    const data = await response.json();
-    document.getElementById("translatedText").value = data.translatedText;
-  } catch (error) {
-    console.error("Translation error:", error);
-    alert("An error occurred during translation.");
-  } finally {
-    document.getElementById("loadingIndicator").style.display = "none";
-    endProgress();
-  }
-}
-
-
-    // Export translated text as .txt
+    /* ================================
+       ====== EXPORT FUNCTIONS =======
+       ================================ */
     document.getElementById("exportTxtButton").addEventListener("click", () => {
       const text = translatedTextEl.value;
       const blob = new Blob([text], { type: "text/plain" });
@@ -743,8 +769,6 @@ async function performTranslation() {
       a.download = "translation.txt";
       a.click();
     });
-
-    // Export translated text as .html
     document.getElementById("exportHtmlButton").addEventListener("click", () => {
       const text = translatedTextEl.value;
       const blob = new Blob([text], { type: "text/html" });
@@ -755,16 +779,16 @@ async function performTranslation() {
       a.click();
     });
 
-    /* ==============================
-       ===== TOGGLE DARK MODE ======
-       ============================== */
+    /* ================================
+       ======= THEME TOGGLE ==========
+       ================================ */
     document.getElementById("themeToggleButton").addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
     });
 
-    /* ==============================
-       == COLLAPSIBLE GLOSSARY UI ==
-       ============================== */
+    /* ================================
+       == COLLAPSIBLE GLOSSARY PANEL ==
+       ================================ */
     const glossaryPanel = document.getElementById("glossaryPanel");
     const toggleGlossaryBtn = document.getElementById("toggleGlossaryPanel");
     toggleGlossaryBtn.addEventListener("click", () => {
@@ -777,20 +801,19 @@ async function performTranslation() {
       }
     });
 
-    /* ==============================
-       == CHARACTER/TOKEN COUNTS ===
-       ============================== */
+    /* ================================
+       === CHARACTER/TOKEN COUNTS ====
+       ================================ */
     function updateCharCount() {
       const text = inputTextEl.value;
       const charCount = text.length;
-      // A naive token approximation: split on whitespace/punctuation
-      const approxTokens = text.trim() ? text.trim().split(/\s+|\p{P}+/u).filter(Boolean).length : 0;
+      const approxTokens = text.trim() ? text.split(/\s+|\p{P}+/u).filter(Boolean).length : 0;
       charCountEl.textContent = `Characters: ${charCount} | Approx. Tokens: ${approxTokens}`;
     }
 
-    /* ==============================
-       === PROGRESS BAR HELPERS ===
-       ============================== */
+    /* ================================
+       ==== PROGRESS BAR HELPERS =====
+       ================================ */
     let progressInterval;
     function startProgress() {
       progressBarContainer.style.display = "block";
@@ -805,7 +828,6 @@ async function performTranslation() {
         }
       }, 200);
     }
-
     function endProgress() {
       clearInterval(progressInterval);
       progressBarEl.style.width = "100%";
