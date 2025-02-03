@@ -753,7 +753,7 @@
       loadingIndicator.style.display = "block";
 
       try {
-        const response = await fetch("/translate", {
+        const response = await fetch("translate-api-production-f067.up.railway.app/translate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
