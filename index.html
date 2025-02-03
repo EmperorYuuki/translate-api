@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,18 +9,18 @@
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
     /* ======== RESET & BASE ======== */
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       font-family: 'Open Sans', Arial, sans-serif;
       background: #f4f5f7;
@@ -33,9 +34,10 @@
       background: #3f51b5;
       color: #fff;
       padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 1.5rem;
     }
+
     header h1 {
       margin: 0;
       font-weight: 600;
@@ -54,17 +56,19 @@
       background: #fff;
       padding: 1.5rem;
       border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
       position: relative;
       margin-bottom: 2rem;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
+
     .section-title {
       text-align: center;
       font-size: 1.4rem;
       margin-bottom: 0.5rem;
       font-weight: 600;
     }
+
     .subtitle {
       color: #666;
       font-size: 0.9rem;
@@ -78,6 +82,7 @@
       margin-bottom: 0.25rem;
       font-weight: 600;
     }
+
     input[type="text"],
     select,
     textarea {
@@ -90,13 +95,15 @@
       color: #333;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
+
     input[type="text"]:focus,
     textarea:focus,
     select:focus {
       outline: none;
       border-color: #3f51b5;
-      box-shadow: 0 0 0 2px rgba(63,81,181,0.15);
+      box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.15);
     }
+
     textarea {
       resize: vertical;
       min-height: 100px;
@@ -114,15 +121,19 @@
       cursor: pointer;
       transition: background-color 0.2s ease, transform 0.1s ease;
     }
+
     button:hover {
       background-color: #2c3996;
     }
+
     button:active {
       transform: scale(0.98);
     }
+
     .secondary {
       background-color: #757575;
     }
+
     .secondary:hover {
       background-color: #5e5e5e;
     }
@@ -133,6 +144,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
     }
+
     @media (max-width: 900px) {
       .grid {
         grid-template-columns: 1fr;
@@ -146,10 +158,12 @@
       margin-bottom: 2rem;
       text-align: center;
     }
+
     #apiKeyInput {
       width: 70%;
       margin-right: 0.5rem;
     }
+
     #apiKeyStatus {
       margin-top: 0.5rem;
       font-weight: 600;
@@ -159,28 +173,32 @@
     #translationSection .section-title {
       margin-top: 0;
     }
+
     #charCount {
       font-size: 0.85rem;
       color: #999;
       margin-bottom: 0.5rem;
     }
+
     #loadingIndicator {
       margin-top: 0.5rem;
       font-size: 0.9rem;
       color: #666;
     }
+
     .progress-bar-container {
       width: 100%;
       background-color: #e9ecef;
       height: 6px;
       border-radius: 4px;
       overflow: hidden;
-      display: none; 
+      display: none;
       position: absolute;
       top: 0;
       left: 0;
       transition: background-color 0.3s ease;
     }
+
     .progress-bar {
       height: 100%;
       background-color: #3f51b5;
@@ -192,11 +210,13 @@
     #glossarySection .section-title {
       margin-top: 0;
     }
+
     #glossaryPanel {
       max-height: 2000px;
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
+
     .collapsed {
       max-height: 0 !important;
       padding: 0 !important;
@@ -211,22 +231,26 @@
       border-radius: 4px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
+
     .glossary-list table {
       width: 100%;
       border-collapse: collapse;
     }
+
     .glossary-list th,
     .glossary-list td {
       text-align: left;
       padding: 0.75rem;
       border-bottom: 1px solid #eee;
     }
+
     .glossary-list thead {
       background: #fafafa;
       position: sticky;
       top: 0;
       z-index: 1;
     }
+
     .glossary-list tbody tr:hover {
       background: #f9f9f9;
     }
@@ -241,27 +265,34 @@
       background-color: #222;
       color: #ccc;
     }
+
     .dark-mode header {
       background-color: #1b1b1b;
       color: #eee;
     }
+
     .dark-mode .section {
       background-color: #2e2e2e;
       color: #ccc;
     }
+
     .dark-mode button {
       background-color: #444;
       color: #eee;
     }
+
     .dark-mode button:hover {
       background-color: #555;
     }
+
     .dark-mode .secondary {
       background-color: #555;
     }
+
     .dark-mode .secondary:hover {
       background-color: #666;
     }
+
     .dark-mode input[type="text"],
     .dark-mode textarea,
     .dark-mode select {
@@ -269,28 +300,36 @@
       border: 1px solid #555;
       color: #ccc;
     }
+
     .dark-mode #charCount {
       color: #aaa;
     }
+
     .dark-mode #loadingIndicator {
       color: #bbb;
     }
+
     .dark-mode .progress-bar-container {
       background-color: #333;
     }
+
     .dark-mode .progress-bar {
       background-color: #666;
     }
+
     .dark-mode .glossary-list {
       border-color: #555;
     }
+
     .dark-mode .glossary-list table thead {
       background-color: #333;
       color: #ccc;
     }
+
     .dark-mode .glossary-list tbody tr:hover {
       background-color: #3b3b3b;
     }
+
     .dark-mode .glossary-list td,
     .dark-mode .glossary-list th {
       border-color: #444;
@@ -317,13 +356,11 @@
     <section class="section" id="contextSection">
       <h2 class="section-title">Persistent Notes for Novel & Fanfiction</h2>
       <p class="subtitle">
-        Enter important context for your story (e.g., "The main character is Gojo Satoru, a playful sorcerer."). 
+        Enter important context for your story (e.g., "The main character is Gojo Satoru, a playful sorcerer.").
         These notes will be added to the system prompt before translation.
       </p>
-      <textarea
-        id="customNotes"
-        placeholder="Example: The main character is Gojo Satoru, with silver hair, witty remarks..."
-      ></textarea>
+      <textarea id="customNotes"
+        placeholder="Example: The main character is Gojo Satoru, with silver hair, witty remarks..."></textarea>
       <div style="margin-top: 1rem;">
         <button id="saveNotesButton">Save Notes</button>
         <button id="clearNotesButton" class="secondary">Clear</button>
@@ -342,7 +379,7 @@
         <p class="subtitle">Paste your text (HTML or plain), then translate</p>
         <div id="charCount">Characters: 0 | Approx. Tokens: 0</div>
         <textarea id="inputText" placeholder="Paste text or HTML here..."></textarea>
-        
+
         <div style="margin-bottom: 1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
           <button id="clearInputButton" class="secondary">Clear Input</button>
           <button id="preReplaceButton">Use Glossary</button>
@@ -361,7 +398,7 @@
 
         <div id="loadingIndicator" style="display:none;">Translating... Please wait.</div>
         <textarea id="translatedText" readonly placeholder="Translated text will appear here."></textarea>
-        
+
         <div style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
           <button id="clearOutputButton" class="secondary">Clear Output</button>
           <button id="exportTxtButton">Export as .txt</button>
@@ -401,12 +438,8 @@
             </div>
           </div>
           <label for="searchGlossary">Search Glossary:</label>
-          <input
-            type="text"
-            id="searchGlossary"
-            placeholder="Search glossary..."
-            style="margin-bottom:1rem; width:100%;"
-          >
+          <input type="text" id="searchGlossary" placeholder="Search glossary..."
+            style="margin-bottom:1rem; width:100%;">
           <div class="glossary-list">
             <table>
               <thead>
@@ -438,7 +471,7 @@
     /* ================================
        =========== GLOBALS ============
        ================================ */
-    const BACKEND_URL = "http://localhost:3000"; // or your deployed server
+    const BACKEND_URL = "https://translate-api-production-bf16.up.railway.app"; // or your deployed server
     let openRouterApiKey = localStorage.getItem("openRouterApiKey") || "";
 
     // Hardcoded sample glossary
@@ -449,13 +482,13 @@
     };
 
     /* ================ DOM Elements ================ */
-    const inputTextEl      = document.getElementById("inputText");
+    const inputTextEl = document.getElementById("inputText");
     const translatedTextEl = document.getElementById("translatedText");
-    const charCountEl      = document.getElementById("charCount");
+    const charCountEl = document.getElementById("charCount");
     const loadingIndicator = document.getElementById("loadingIndicator");
     const progressBarContainer = document.getElementById("progressBarContainer");
-    const progressBarEl    = document.getElementById("progressBar");
-    const docxFileInput    = document.getElementById("docxFileInput");
+    const progressBarEl = document.getElementById("progressBar");
+    const docxFileInput = document.getElementById("docxFileInput");
 
     /* ================ On Load ================ */
     document.getElementById("apiKeyInput").value = openRouterApiKey;
@@ -465,7 +498,7 @@
       if (storedGlossary) {
         try {
           glossary = { ...glossary, ...JSON.parse(storedGlossary) };
-        } catch {}
+        } catch { }
       }
       renderGlossaryList();
       updateCharCount();
@@ -539,7 +572,7 @@
         glossaryTable.appendChild(row);
       }
     }
-    window.toggleFormat = function(term) {
+    window.toggleFormat = function (term) {
       const formats = ["off", "bold", "italic"];
       const current = glossary[term].format;
       const next = formats[(formats.indexOf(current) + 1) % formats.length];
@@ -547,12 +580,12 @@
       saveGlossary();
       renderGlossaryList();
     };
-    window.editGlossaryTerm = function(term) {
+    window.editGlossaryTerm = function (term) {
       document.getElementById("newTerm").value = term;
       document.getElementById("newTranslation").value = glossary[term].translation;
       document.getElementById("newCategory").value = glossary[term].category || "";
     };
-    window.deleteGlossaryTerm = function(term) {
+    window.deleteGlossaryTerm = function (term) {
       delete glossary[term];
       saveGlossary();
       renderGlossaryList();
@@ -582,8 +615,8 @@
       const filtered = {};
       for (const [term, entry] of Object.entries(glossary)) {
         if (term.toLowerCase().includes(val) ||
-            entry.translation.toLowerCase().includes(val) ||
-            (entry.category || "").toLowerCase().includes(val)) {
+          entry.translation.toLowerCase().includes(val) ||
+          (entry.category || "").toLowerCase().includes(val)) {
           filtered[term] = entry;
         }
       }
@@ -655,10 +688,6 @@
     docxFileInput.addEventListener("change", async (e) => {
       const file = e.target.files[0];
       if (!file) return;
-      if (!openRouterApiKey) {
-        alert("Please set your API key first.");
-        return;
-      }
       try {
         const formData = new FormData();
         formData.append("file", file);
@@ -743,7 +772,6 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            apiKey: openRouterApiKey,
             text: chunk,
             targetLanguage: targetLanguage,
             glossary,
@@ -837,4 +865,5 @@
     }
   </script>
 </body>
+
 </html>
